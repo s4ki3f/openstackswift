@@ -26,6 +26,7 @@ sudo apt-get install python-coverage python-dev python-nose \
                      python-mock
 ```
 ![image](https://github.com/s4ki3f/openstackswift/assets/29111757/91fc9bdf-492a-4087-92f7-74950a1e8f56)
+
 we will go one by one and recheck the version of Python packages to change
 ```bash
 sudo apt-get install python3-coverage python3-dev python3-nose
