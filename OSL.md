@@ -64,3 +64,36 @@ sudo blkid
 ![image](https://github.com/s4ki3f/openstackswift/assets/29111757/f97b3f4d-e3af-47f9-b1a5-0ad1265be3a9)
 
 Edit /etc/fstab and add:
+
+UUID="<UUID-from-output-above>" /mnt/sdb1 xfs noatime 0 0
+
+Create the Swift data mount point and test that mounting works:
+
+```bash
+sudo mkdir /mnt/sdb1
+sudo mount -a
+```
+**Common Post-Device Setup**
+
+Create the individualized data links:
+```bash
+sudo mkdir /mnt/sdb1/1 /mnt/sdb1/2 /mnt/sdb1/3 /mnt/sdb1/4
+sudo chown ${USER}:${USER} /mnt/sdb1/*
+for x in {1..4}; do sudo ln -s /mnt/sdb1/$x /srv/$x; done
+sudo mkdir -p /srv/1/node/sdb1 /srv/1/node/sdb5 \
+              /srv/2/node/sdb2 /srv/2/node/sdb6 \
+              /srv/3/node/sdb3 /srv/3/node/sdb7 \
+              /srv/4/node/sdb4 /srv/4/node/sdb8
+sudo mkdir -p /var/run/swift
+sudo mkdir -p /var/cache/swift /var/cache/swift2 \
+              /var/cache/swift3 /var/cache/swift4
+sudo chown -R ${USER}:${USER} /var/run/swift
+sudo chown -R ${USER}:${USER} /var/cache/swift*
+# **Make sure to include the trailing slash after /srv/$x/**
+for x in {1..4}; do sudo chown -R ${USER}:${USER} /srv/$x/; done
+```
+Restore appropriate permissions on reboot.
+
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/4148003c-1512-4152-92ec-9dd7ba68798c)
+
+Creating an XFS tmp dir
