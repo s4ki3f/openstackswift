@@ -97,3 +97,92 @@ Restore appropriate permissions on reboot.
 ![image](https://github.com/s4ki3f/openstackswift/assets/29111757/4148003c-1512-4152-92ec-9dd7ba68798c)
 
 Creating an XFS tmp dir
+
+Create the file for the tmp loopback device:
+
+
+```bash
+sudo mkdir -p /srv
+sudo truncate -s 1GB /srv/swift-tmp  # create 1GB file for XFS in /srv
+sudo mkfs.xfs /srv/swift-tmp
+
+```
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/58bc6bc8-34c5-42c9-a9be-de887a071142)
+
+To mount the tmp loopback device at /tmp, do the following:
+```bash
+sudo mount -o loop,noatime /srv/swift-tmp /tmp
+sudo chmod -R 1777 /tmp
+```
+To persist this, edit and add the following to /etc/fstab:
+
+```bash
+/srv/swift-tmp /tmp xfs rw,noatime,attr2,inode64,noquota 0 0
+```
+
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/813e22c7-d866-4c05-a9d8-5a92463a8974)
+
+
+To mount the tmp loopback at an alternate location (for example, /mnt/tmp):
+
+```bash
+sudo mkdir -p /mnt/tmp
+sudo mount -o loop,noatime /srv/swift-tmp /mnt/tmp
+sudo chown ${USER}:${USER} /mnt/tmp
+```
+To persist this, edit and add the following to /etc/fstab:
+
+```bash
+/srv/swift-tmp /mnt/tmp xfs rw,noatime,attr2,inode64,noquota 0 0
+```
+
+Set your TMPDIR environment dir so that Swift looks in the right location:
+
+```bash
+export TMPDIR=/mnt/tmp
+echo "export TMPDIR=/mnt/tmp" >> $HOME/.bashrc
+```
+
+**Getting the code**
+
+the python-swiftclient 
+
+```bash
+cd $HOME; git clone https://opendev.org/openstack/python-swiftclient.git
+```
+Build a development installation of python-swiftclient:
+
+```bash
+cd $HOME/python-swiftclient; sudo python3 setup.py develop; cd -
+```
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/c75b1d77-2968-49f1-aab4-3617a66ae576)
+
+clonning swift repo:
+
+```bash
+git clone https://github.com/openstack/swift.git
+```
+Build a development installation of Swift:
+
+
+```bash
+cd $HOME/swift; sudo pip install --no-binary cryptography -r requirements.txt; sudo python3 setup.py develop; cd -
+```
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/71e09050-b51b-40d2-9cef-2ce5b7316b6a)
+
+Install Swift’s test dependencies:
+
+
+```bash
+cd $HOME/swift; sudo pip install -r test-requirements.txt
+
+```
+**Setting up rsync**
+Create /etc/rsyncd.conf:
+
+```bash
+sudo cp $HOME/swift/doc/saio/rsyncd.conf /etc/
+sudo sed -i "s/<your-user-name>/${USER}/" /etc/rsyncd.conf
+```
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/c121c486-8158-4ca6-916d-df2d3e731b07)
+
