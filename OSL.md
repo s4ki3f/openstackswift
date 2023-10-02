@@ -1457,8 +1457,36 @@ Construct the initial rings using the provided script:
 ```bash
 remakerings
 ```
-Testing Swift
+**Testing Swift**
 Verify the unit tests run:
 ```bash
 $HOME/swift/.unittests
 ```
+Start the “main” Swift daemon processes (proxy, account, container, and object):
+
+```bash
+startmain
+```
+
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/ddcc9225-59b4-4ad1-ae56-fc144f9fa2f6)
+
+Get an X-Storage-Url and X-Auth-Token:
+
+```bash
+curl -v -H 'X-Storage-User: test:tester' -H 'X-Storage-Pass: testing' http://127.0.0.1:8080/auth/v1.0
+```
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/6fa24bb7-20dd-472e-8ac1-3d04f6f2c05e)
+
+Check that you can GET account:
+
+```bash
+curl -v -H 'X-Auth-Token: <token-from-x-auth-token-above>' <url-from-x-storage-url-above>
+```
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/797a3a8a-7963-4664-837f-2b3caaf27da7)
+
+Check that swift command provided by the python-swiftclient package works:
+
+```bash
+swift -A http://127.0.0.1:8080/auth/v1.0 -U test:tester -K testing stat
+```
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/58856258-da7d-41a1-8d6e-4a8b71fffa6e)
