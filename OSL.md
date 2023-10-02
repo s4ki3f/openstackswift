@@ -1419,3 +1419,46 @@ fake_syslog = False
 ![image](https://github.com/s4ki3f/openstackswift/assets/29111757/c665b63d-4639-4d6c-b184-5cc1a6ee26a9)
 
 **Configure environment variables for Swift**
+Add an environment variable for running tests below:
+
+```bash
+echo "export SWIFT_TEST_CONFIG_FILE=/etc/swift/test.conf" >> $HOME/.bashrc
+```
+Be sure that your PATH includes the bin directory:
+
+```bash
+echo "export PATH=${PATH}:$HOME/bin" >> $HOME/.bashrc
+```
+If you are using a loopback device for Swift Storage, add an environment var to substitute /dev/sdb1 with /srv/swift-disk:
+
+```bash
+echo "export SAIO_BLOCK_DEVICE=/srv/swift-disk" >> $HOME/.bashrc
+```
+If you are using a device other than /dev/sdb1 for Swift storage (for example, /dev/vdb1), add an environment var to substitute it:
+
+```bash
+echo "export SAIO_BLOCK_DEVICE=/dev/vdb1" >> $HOME/.bashrc
+```
+If you are using a location other than /tmp for Swift tmp data (for example, /mnt/tmp), add TMPDIR environment var to set it:
+
+```bash
+export TMPDIR=/mnt/tmp
+echo "export TMPDIR=/mnt/tmp" >> $HOME/.bashrc
+```
+Source the above environment variables into your current environment:
+
+```bash
+. $HOME/.bashrc
+```
+
+**Constructing initial rings**
+Construct the initial rings using the provided script:
+
+```bash
+remakerings
+```
+Testing Swift
+Verify the unit tests run:
+```bash
+$HOME/swift/.unittests
+```
