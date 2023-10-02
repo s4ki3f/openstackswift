@@ -186,3 +186,105 @@ sudo sed -i "s/<your-user-name>/${USER}/" /etc/rsyncd.conf
 ```
 ![image](https://github.com/s4ki3f/openstackswift/assets/29111757/c121c486-8158-4ca6-916d-df2d3e731b07)
 
+Here is the default rsyncd.conf file contents maintained in the repo that is copied and fixed up above:
+
+```bash
+uid = <your-user-name>
+gid = <your-user-name>
+log file = /var/log/rsyncd.log
+pid file = /var/run/rsyncd.pid
+address = 0.0.0.0
+
+[account6212]
+max connections = 25
+path = /srv/1/node/
+read only = false
+lock file = /var/lock/account6212.lock
+
+[account6222]
+max connections = 25
+path = /srv/2/node/
+read only = false
+lock file = /var/lock/account6222.lock
+
+[account6232]
+max connections = 25
+path = /srv/3/node/
+read only = false
+lock file = /var/lock/account6232.lock
+
+[account6242]
+max connections = 25
+path = /srv/4/node/
+read only = false
+lock file = /var/lock/account6242.lock
+
+[container6211]
+max connections = 25
+path = /srv/1/node/
+read only = false
+lock file = /var/lock/container6211.lock
+
+[container6221]
+max connections = 25
+path = /srv/2/node/
+read only = false
+lock file = /var/lock/container6221.lock
+
+[container6231]
+max connections = 25
+path = /srv/3/node/
+read only = false
+lock file = /var/lock/container6231.lock
+
+[container6241]
+max connections = 25
+path = /srv/4/node/
+read only = false
+lock file = /var/lock/container6241.lock
+
+[object6210]
+max connections = 25
+path = /srv/1/node/
+read only = false
+lock file = /var/lock/object6210.lock
+
+[object6220]
+max connections = 25
+path = /srv/2/node/
+read only = false
+lock file = /var/lock/object6220.lock
+
+[object6230]
+max connections = 25
+path = /srv/3/node/
+read only = false
+lock file = /var/lock/object6230.lock
+
+[object6240]
+max connections = 25
+path = /srv/4/node/
+read only = false
+lock file = /var/lock/object6240.lock
+```
+Start the rsync daemon
+
+```bash
+sudo systemctl enable rsync
+sudo systemctl start rsync
+```
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/c5a17c69-788f-4eeb-a87f-59a9186fbb06)
+
+Verify rsync is accepting connections for all servers:
+```bash
+rsync rsync://pub@localhost/
+```
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/22763e27-4505-4dad-9dee-2c16d38cd3c3)
+
+**Starting memcached**
+
+```bash
+sudo systemctl enable memcached
+sudo systemctl start memcached
+```
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/482caca2-43d9-4977-a916-a148f97b5972)
