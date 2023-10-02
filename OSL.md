@@ -1,6 +1,9 @@
 Installing the latest OpenStack Swift doc
 
 System Info
+2core virtual CPU
+6gb ram
+Ubuntu 22
 
 First adding users to the user group
 
