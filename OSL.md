@@ -1473,6 +1473,10 @@ startmain
 
 ![image](https://github.com/s4ki3f/openstackswift/assets/29111757/ddcc9225-59b4-4ad1-ae56-fc144f9fa2f6)
 
+if startmain comes up with error then change permission and it will look like this
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/e96d855e-3c31-4e32-ac0a-f7379c098248)
+
+
 Get an X-Storage-Url and X-Auth-Token:
 
 ```bash
