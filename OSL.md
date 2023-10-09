@@ -1516,10 +1516,11 @@ Stat for the container
 ![image](https://github.com/s4ki3f/openstackswift/assets/29111757/fa222bbb-e18c-4719-9194-b61a5ae9722d)
 
 douwnloading file from container
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/8658f853-9d88-4f69-8357-2d677b9e028e)
+
+
+replicator
 ![Uploading image.png…]()
-
-
-
 
 
 
