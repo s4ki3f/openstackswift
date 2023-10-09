@@ -1497,3 +1497,29 @@ Check that swift command provided by the python-swiftclient package works:
 swift -A http://127.0.0.1:8080/auth/v1.0 -U test:tester -K testing stat
 ```
 ![image](https://github.com/s4ki3f/openstackswift/assets/29111757/58856258-da7d-41a1-8d6e-4a8b71fffa6e)
+
+
+Few Bug fix
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/60706b96-82e4-47eb-ae29-d602638f5e1c)
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/852b84ca-7060-4fac-9fea-08fa7a182211)
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/6e7dbe91-4cda-42b8-b777-69daa2c58b59)
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/400167d8-a804-46a9-acce-2e324bcfbcb0)
+
+
+Upload to container named sadiqul sakif 
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/d073297c-f1a9-4cb9-824e-0220139949d8)
+
+container list 
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/519150c5-700c-4933-8262-f44e9358ddc4)
+
+Stat for the container 
+![image](https://github.com/s4ki3f/openstackswift/assets/29111757/fa222bbb-e18c-4719-9194-b61a5ae9722d)
+
+douwnloading file from container
+![Uploading image.png…]()
+
+
+
+
+
+
